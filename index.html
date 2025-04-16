@@ -43,7 +43,7 @@
     /* === Headline === */
     h1 {
       font-size: clamp(2rem, 5vw, 4rem);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       position: relative;
     }
     h1::after {
@@ -58,12 +58,23 @@
       box-shadow: 0 0 6px var(--neon), 0 0 12px var(--neon);
     }
 
+    /* === Tagline === */
+    .tagline {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
+      color: #e0e0e0;
+    }
+    .tagline strong {
+      color: var(--neon);
+    }
+
     /* === Dynamic typing line === */
     #typed {
       font-family: "Fira Code", monospace;
       font-size: clamp(1rem, 2.5vw, 1.5rem);
       color: var(--neon);
-      margin-top: 0.5rem;
+      margin-top: 0.2rem;
       min-height: 1.5em; /* preserves height during erase */
     }
 
@@ -118,6 +129,10 @@
     UMEXIM.COM
     <span style="display:block;font-size:0.5em">AI‑Powered Makeover in Progress</span>
   </h1>
+  <p class="tagline">
+    An ongoing, dynamic project by <strong>USAODATOV</strong> — seeking the <em>ultimate me</em> in the world of AI.<br />
+    Affiliated with <span style="white-space:nowrap;">Regent College London</span> &amp; The University&nbsp;of&nbsp;Greater&nbsp;Manchester.
+  </p>
   <p id="typed"></p>
 
   <footer>
