@@ -1,23 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Umexim</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 400px;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UMEXIM | Intelligent Reconstruction</title>
+
+  <!-- Google Fonts for a tech‑friendly look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome (cog icons). Replace XYZ with your own kit or use the free CDN link. -->
+  <script src="https://kit.fontawesome.com/XYZ.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* === Theme Variables === */
+    :root {
+      --bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      --neon: #00d9ff;
+    }
+
+    /* === Layout Reset === */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* === Headline === */
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -4px;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background: var(--neon);
+      box-shadow: 0 0 6px var(--neon), 0 0 12px var(--neon);
+    }
+
+    /* === Dynamic typing line === */
+    #typed {
+      font-family: "Fira Code", monospace;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--neon);
+      margin-top: 0.5rem;
+      min-height: 1.5em; /* preserves height during erase */
+    }
+
+    /* === Rotating cog outlines === */
+    .cog {
+      position: absolute;
+      border: 8px solid var(--neon);
+      border-radius: 50%;
+      filter: drop-shadow(0 0 8px var(--neon));
+      opacity: 0.15;
+      animation: spin 24s linear infinite;
+    }
+    .cog.small {
+      width: 160px;
+      height: 160px;
+      top: 8%;
+      left: -120px;
+    }
+    .cog.big {
+      width: 280px;
+      height: 280px;
+      bottom: 4%;
+      right: -160px;
+      animation-duration: 32s;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* === Footer === */
+    footer {
+      position: fixed;
+      bottom: 1rem;
+      width: 100%;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+    a {
+      color: var(--neon);
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to UMEXIM.COM!</h1>
-    <p>This WEBPAGE is under BIG construction.</p>
+  <!-- Decorative cogs to hint at continuous AI optimisation -->
+  <span class="cog small"></span>
+  <span class="cog big"></span>
+
+  <h1>
+    UMEXIM.COM
+    <span style="display:block;font-size:0.5em">AI‑Powered Makeover in Progress</span>
+  </h1>
+  <p id="typed"></p>
+
+  <footer>
+    Curious minds build better futures — © <script>document.write(new Date().getFullYear());</script> UMEXIM
+  </footer>
+
+  <script>
+    /* === Simple type‑writer effect with vanilla JS === */
+    const phrases = [
+      "training neural nets …",
+      "optimising supply chains …",
+      "finding patterns in chaos …",
+      "unlocking hidden insights …",
+      "augmenting human potential …",
+      "crafting intelligent solutions …",
+    ];
+
+    let idx = 0;
+    const typedEl = document.getElementById("typed");
+
+    function typePhrase(phrase, i = 0) {
+      if (i < phrase.length) {
+        typedEl.textContent += phrase.charAt(i);
+        setTimeout(() => typePhrase(phrase, i + 1), 60);
+      } else {
+        setTimeout(erasePhrase, 1200);
+      }
+    }
+
+    function erasePhrase() {
+      const text = typedEl.textContent;
+      if (text.length) {
+        typedEl.textContent = text.substring(0, text.length - 1);
+        setTimeout(erasePhrase, 40);
+      } else {
+        idx = (idx + 1) % phrases.length;
+        setTimeout(() => typePhrase(phrases[idx]), 200);
+      }
+    }
+
+    // Kick off the animation on load
+    typePhrase(phrases[idx]);
+  </script>
 </body>
 </html>
