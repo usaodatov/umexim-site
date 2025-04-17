@@ -14,6 +14,7 @@
     :root{
       --matrix-dim:#00924b;      /* darker green */
       --matrix-bright:#00ff66;   /* bright leading glyph */
+      --cosmic:#0077ff;          /* deep‑blue scientific flashes */
       --neon:#00d9ff;           /* accent */
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -29,9 +30,12 @@
       text-align:center;
     }
 
-    #matrix{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:0;}
+    /* layered canvases */
+    #matrix,#cosmic{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;}
+    #matrix{z-index:0;}
+    #cosmic{z-index:1;}
 
-    .content{position:relative;z-index:1;max-width:90%;}
+    .content{position:relative;z-index:2;max-width:90%;}
 
     h1{font-size:clamp(2rem,6vw,4.5rem);text-transform:lowercase;margin-bottom:.6rem;position:relative;}
     h1::after{content:"";position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);width:60%;height:3px;background:var(--neon);box-shadow:0 0 6px var(--neon),0 0 12px var(--neon);}
@@ -46,13 +50,14 @@
 </head>
 <body>
   <canvas id="matrix"></canvas>
+  <canvas id="cosmic"></canvas>
 
   <div class="content">
     <h1>umexim.com <span style="display:block;font-size:.55em">ai‑powered makeover in progress</span></h1>
 
     <p class="tagline">
       an ongoing, dynamic project by <strong>usaodatov</strong> — seeking the <em>ultimate me</em> in the world of ai.<br>
-      affiliated with RCL & The University of Greater Manchester.
+      affiliated with regent college london & the university of greater manchester.
     </p>
 
     <p id="typed"></p>
@@ -64,39 +69,35 @@
 
 <script>
 /**********************  MATRIX RAIN  **********************/
-const canvas = document.getElementById('matrix');
-const ctx = canvas.getContext('2d');
-const fontSize = 27;          // 50% larger glyphs
-const speedFactor = 0.125;    // 50% slower than previous (now 12.5% of original)
-const glyphs = 'abcdefghijklmnopqrstuvwxyz0123456789';
-const injectWords = ['umid','saodatov','umexim','regent','college','manchester'];
+const matrixCanvas = document.getElementById('matrix');
+const mtx = matrixCanvas.getContext('2d');
+const fontSize = 27;          // large glyphs for readability
+const speedFactor = 0.125;    // slow pace
+const glyphs = 'abcdefghijklmnopqrstuvwxyz0123456789πσθλμΔΩ√∑∫±≠≈';
+const injectWords = ['sin','cos','tan','√n','∑','∫','π','e^{iπ}','log','ln','ΔE','θ','λ','Ω'];
 
-// colours from CSS custom props
-const styles = getComputedStyle(document.documentElement);
-const dimColor = styles.getPropertyValue('--matrix-dim').trim() || '#00924b';
-const brightColor = styles.getPropertyValue('--matrix-bright').trim() || '#00ff66';
+const dimColor = getComputedStyle(document.documentElement).getPropertyValue('--matrix-dim').trim();
+const brightColor = getComputedStyle(document.documentElement).getPropertyValue('--matrix-bright').trim();
 
 let width, height, columns, drops;
 
-function resize(){
-  width  = canvas.width  = window.innerWidth;
-  height = canvas.height = window.innerHeight;
+function resizeMatrix(){
+  width  = matrixCanvas.width  = window.innerWidth;
+  height = matrixCanvas.height = window.innerHeight;
   columns = Math.floor(width / fontSize);
-  // each drop keeps state: y and optional word sequence
   drops = Array.from({length:columns}, () => ({ y: Math.random()*-height, word:null, idx:0 }));
 }
-window.addEventListener('resize', resize);
-resize();
-ctx.font = `${fontSize}px 'Fira Code', monospace`;
-ctx.textBaseline = 'top';
+window.addEventListener('resize', () => { resizeMatrix(); resizeCosmic(); });
+resizeMatrix();
+mtx.font = `${fontSize}px 'Fira Code', monospace`;
+mtx.textBaseline = 'top';
 
-function draw(){
-  ctx.fillStyle = 'rgba(0,0,0,0.08)';
-  ctx.fillRect(0,0,width,height);
+function drawMatrix(){
+  mtx.fillStyle = 'rgba(0,0,0,0.08)';
+  mtx.fillRect(0,0,width,height);
 
   drops.forEach((d, i) => {
-    // decide injection
-    if(!d.word && Math.random() < 0.0015){ // a bit higher so full words visible
+    if(!d.word && Math.random() < 0.0015){
       d.word = injectWords[Math.floor(Math.random()*injectWords.length)].split('');
       d.idx = 0;
     }
@@ -104,15 +105,15 @@ function draw(){
     let char;
     if(d.word){
       char = d.word[d.idx] || ' ';
-      ctx.fillStyle = brightColor;
+      mtx.fillStyle = brightColor;
       d.idx++;
       if(d.idx >= d.word.length){ d.word = null; }
     } else {
       char = glyphs[Math.floor(Math.random()*glyphs.length)];
-      ctx.fillStyle = dimColor;
+      mtx.fillStyle = dimColor;
     }
 
-    ctx.fillText(char, i*fontSize, d.y);
+    mtx.fillText(char, i*fontSize, d.y);
 
     d.y += fontSize * speedFactor;
     if(d.y > height){
@@ -121,9 +122,53 @@ function draw(){
     }
   });
 
-  requestAnimationFrame(draw);
+  requestAnimationFrame(drawMatrix);
 }
-requestAnimationFrame(draw);
+requestAnimationFrame(drawMatrix);
+
+/**********************  COSMIC BLUE FORMULAE  **********************/
+const cosmicCanvas = document.getElementById('cosmic');
+const ctxC = cosmicCanvas.getContext('2d');
+const cosmicColor = getComputedStyle(document.documentElement).getPropertyValue('--cosmic').trim();
+const cosmicSymbols = ['E=mc²','c²','∆x∆p≥ħ/2','∇·E=ρ/ε₀','∂Ψ/∂t','Ψ','∑','∞','γ','β','λ','Ω','r²=x²+y²','F=ma','Gm₁m₂/r²'];
+let cw,ch,particles=[];
+
+function resizeCosmic(){
+  cw = cosmicCanvas.width  = window.innerWidth;
+  ch = cosmicCanvas.height = window.innerHeight;
+}
+resizeCosmic();
+
+function spawnParticle(){
+  const text = cosmicSymbols[Math.floor(Math.random()*cosmicSymbols.length)];
+  const x = Math.random()*cw;
+  const y = Math.random()*ch;
+  const life = 220 + Math.random()*80; // frames
+  particles.push({text,x,y,life,alpha:1});
+  if(particles.length>50) particles.shift();
+}
+
+function drawCosmic(){
+  ctxC.clearRect(0,0,cw,ch);
+  ctxC.font = '20px "Fira Code", monospace';
+  particles.forEach(p=>{
+    p.life -= 1;
+    p.alpha = p.life/300;
+    ctxC.fillStyle = `rgba(${hexToRgb(cosmicColor)},${p.alpha})`;
+    ctxC.fillText(p.text,p.x,p.y);
+  });
+  particles = particles.filter(p=>p.life>0);
+  if(Math.random()<0.04) spawnParticle(); // spawn rate
+  requestAnimationFrame(drawCosmic);
+}
+requestAnimationFrame(drawCosmic);
+
+function hexToRgb(hex){
+  const h = hex.replace('#','');
+  const bigint = parseInt(h,16);
+  const r=(bigint>>16)&255, g=(bigint>>8)&255, b=bigint&255;
+  return `${r},${g},${b}`;
+}
 
 /**********************  TYPEWRITER  **********************/
 const phrases = [
