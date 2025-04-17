@@ -5,192 +5,154 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>umexim | intelligent reconstruction</title>
 
-  <!-- google fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- font awesome (optional icons) -->
-  <script src="https://kit.fontawesome.com/XYZ.js" crossorigin="anonymous"></script>
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* === theme variables === */
-    :root {
-      --bg-grad: linear-gradient(135deg, #000 0%, #0f0c29 30%, #302b63 70%, #24243e 100%);
-      --neon: #00d9ff;
-      --matrix-dim: #008c3f;
-      --matrix-bright: #00ff66;
+    :root{
+      --matrix-dim:#00924b;      /* darker green */
+      --matrix-bright:#00ff66;   /* bright leading glyph */
+      --neon:#00d9ff;           /* accent */
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;}
+    body{
+      font-family:"Poppins",sans-serif;
+      background:#000;
+      color:#fff;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      text-align:center;
     }
 
-    /* === reset === */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    #matrix{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:0;}
 
-    body {
-      font-family: "Poppins", sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: var(--bg-grad);
-      color: #fff;
-      text-align: center;
-      overflow: hidden;
-    }
+    .content{position:relative;z-index:1;max-width:90%;}
 
-    /* === matrix canvas === */
-    #matrix {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background: transparent;
-    }
+    h1{font-size:clamp(2rem,6vw,4.5rem);text-transform:lowercase;margin-bottom:.6rem;position:relative;}
+    h1::after{content:"";position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);width:60%;height:3px;background:var(--neon);box-shadow:0 0 6px var(--neon),0 0 12px var(--neon);}
 
-    /* === headline === */
-    h1 { font-size: clamp(1.8rem, 4.5vw, 3.8rem); margin-bottom: .6rem; text-transform: lowercase; position: relative; }
-    h1::after { content:""; position:absolute; left:50%; bottom:-4px; transform:translateX(-50%); width:60%; height:3px; background:var(--neon); box-shadow:0 0 6px var(--neon),0 0 12px var(--neon); }
+    .tagline{font-size:clamp(.9rem,2.2vw,1.2rem);line-height:1.45;margin-bottom:1rem;text-transform:lowercase;color:#c7c7c7;}
+    .tagline strong{color:var(--neon);}
 
-    /* === tagline === */
-    .tagline { font-size: clamp(.8rem,2vw,1rem); line-height:1.4; margin-bottom:1.1rem; color:#c6c6c6; text-transform: lowercase; }
-    .tagline strong { color: var(--neon); }
+    #typed{font-family:"Fira Code",monospace;font-size:clamp(1rem,2.5vw,1.4rem);color:var(--neon);min-height:1.4em;text-transform:lowercase;}
 
-    /* === typing line === */
-    #typed { font-family:"Fira Code", monospace; font-size:clamp(.9rem,2.3vw,1.3rem); color:var(--neon); margin-top:.2rem; min-height:1.4em; text-transform:lowercase; }
-
-    /* === cogs === */
-    .cog { position:absolute; border:6px solid var(--neon); border-radius:50%; filter:drop-shadow(0 0 8px var(--neon)); opacity:.12; animation:spin 24s linear infinite; pointer-events:none; }
-    .cog.small{width:160px;height:160px;top:8%;left:-120px;}
-    .cog.big{width:280px;height:280px;bottom:4%;right:-160px;animation-duration:32s;}
-    @keyframes spin{to{transform:rotate(360deg);}}
-
-    /* === footer === */
-    footer{position:fixed;bottom:1rem;width:100%;font-size:.8rem;opacity:.6;text-transform:lowercase;}
-    a{color:var(--neon);text-decoration:none;}
+    footer{position:fixed;bottom:.8rem;width:100%;font-size:.75rem;text-transform:lowercase;opacity:.65;}
   </style>
 </head>
 <body>
   <canvas id="matrix"></canvas>
-  <span class="cog small"></span>
-  <span class="cog big"></span>
 
-  <h1>
-    umexim.com
-    <span style="display:block;font-size:.5em">ai‑powered makeover in progress</span>
-  </h1>
+  <div class="content">
+    <h1>umexim.com <span style="display:block;font-size:.55em">ai‑powered makeover in progress</span></h1>
 
-  <p class="tagline">
-    an ongoing, dynamic project by <strong>usaodatov</strong> — seeking the <em>ultimate me</em> in the world of ai.<br>
-    affiliated with regent college london & the university of greater manchester.
-  </p>
+    <p class="tagline">
+      an ongoing, dynamic project by <strong>usaodatov</strong> — seeking the <em>ultimate me</em> in the world of ai.<br>
+      affiliated with regent college london & the university of greater manchester.
+    </p>
 
-  <p id="typed"></p>
+    <p id="typed"></p>
+  </div>
 
   <footer>
     curious minds build better futures — © <script>document.write(new Date().getFullYear());</script> umexim
   </footer>
 
-  <script>
-    /* ===== MATRIX RAIN EFFECT ===== */
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
+<script>
+/**********************  MATRIX RAIN  **********************/
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+const fontSize = 27;          // 50% larger glyphs
+const speedFactor = 0.125;    // 50% slower than previous (now 12.5% of original)
+const glyphs = 'abcdefghijklmnopqrstuvwxyz0123456789';
+const injectWords = ['umid','saodatov','umexim','regent','college','manchester'];
 
-    function sizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+// colours from CSS custom props
+const styles = getComputedStyle(document.documentElement);
+const dimColor = styles.getPropertyValue('--matrix-dim').trim() || '#00924b';
+const brightColor = styles.getPropertyValue('--matrix-bright').trim() || '#00ff66';
+
+let width, height, columns, drops;
+
+function resize(){
+  width  = canvas.width  = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+  columns = Math.floor(width / fontSize);
+  // each drop keeps state: y and optional word sequence
+  drops = Array.from({length:columns}, () => ({ y: Math.random()*-height, word:null, idx:0 }));
+}
+window.addEventListener('resize', resize);
+resize();
+ctx.font = `${fontSize}px 'Fira Code', monospace`;
+ctx.textBaseline = 'top';
+
+function draw(){
+  ctx.fillStyle = 'rgba(0,0,0,0.08)';
+  ctx.fillRect(0,0,width,height);
+
+  drops.forEach((d, i) => {
+    // decide injection
+    if(!d.word && Math.random() < 0.0015){ // a bit higher so full words visible
+      d.word = injectWords[Math.floor(Math.random()*injectWords.length)].split('');
+      d.idx = 0;
     }
-    sizeCanvas();
-    window.addEventListener("resize", () => { sizeCanvas(); initDrops(); });
 
-    const columnWidth = 18; // px
-    let columns, drops;
-
-    const injections = [
-      "umid","saodatov","umexim","regent college","university of greater manchester"
-    ];
-
-    function initDrops() {
-      columns = Math.floor(canvas.width / columnWidth);
-      drops = Array.from({ length: columns }).map(() => ({
-        y: Math.random() * canvas.height,
-        word: null,
-        charIndex: 0,
-      }));
+    let char;
+    if(d.word){
+      char = d.word[d.idx] || ' ';
+      ctx.fillStyle = brightColor;
+      d.idx++;
+      if(d.idx >= d.word.length){ d.word = null; }
+    } else {
+      char = glyphs[Math.floor(Math.random()*glyphs.length)];
+      ctx.fillStyle = dimColor;
     }
-    initDrops();
 
-    const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    ctx.fillText(char, i*fontSize, d.y);
 
-    function draw() {
-      // translucent background for tail effect
-      ctx.fillStyle = "rgba(0,0,0,0.08)";
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-
-      ctx.font = "16px 'Fira Code', monospace";
-
-      drops.forEach((drop, i) => {
-        // choose character
-        if (!drop.word && Math.random() < 0.003) {
-          drop.word = injections[Math.floor(Math.random()*injections.length)].split("");
-          drop.charIndex = 0;
-        }
-
-        let char;
-        let bright = false;
-        if (drop.word) {
-          char = drop.word[drop.charIndex] || " ";
-          bright = true;
-          drop.charIndex++;
-          if (drop.charIndex >= drop.word.length) drop.word = null;
-        } else {
-          char = chars.charAt(Math.floor(Math.random()*chars.length));
-        }
-
-        // brighter colour for injected words / leading glyph
-        ctx.fillStyle = bright ? "var(--matrix-bright)" : "var(--matrix-dim)";
-        ctx.fillText(char, i*columnWidth, drop.y);
-
-        // move drop
-        drop.y += 16;
-        if (drop.y > canvas.height && Math.random() > 0.97) drop.y = 0;
-      });
-      requestAnimationFrame(draw);
+    d.y += fontSize * speedFactor;
+    if(d.y > height){
+      d.y = -fontSize * (Math.random()*20);
+      d.word = null; d.idx = 0;
     }
-    draw();
+  });
 
-    /* ===== TYPEWRITER EFFECT ===== */
-    const phrases = [
-      "training neural nets …",
-      "optimising supply chains …",
-      "finding patterns in chaos …",
-      "unlocking hidden insights …",
-      "augmenting human potential …",
-      "crafting intelligent solutions …",
-    ];
-    let pIdx = 0;
-    const typed = document.getElementById("typed");
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
 
-    function type(i=0){
-      const phrase = phrases[pIdx];
-      if(i < phrase.length){
-        typed.textContent += phrase[i];
-        setTimeout(()=>type(i+1),60);
-      } else {
-        setTimeout(()=>erase(),1200);
-      }
-    }
-    function erase(){
-      if(typed.textContent.length){
-        typed.textContent = typed.textContent.slice(0,-1);
-        setTimeout(()=>erase(),40);
-      } else {
-        pIdx = (pIdx+1)%phrases.length;
-        setTimeout(()=>type(),200);
-      }
-    }
-    type();
-  </script>
+/**********************  TYPEWRITER  **********************/
+const phrases = [
+  'training neural nets …',
+  'optimising supply chains …',
+  'finding patterns in chaos …',
+  'unlocking hidden insights …',
+  'augmenting human potential …',
+  'crafting intelligent solutions …'
+];
+let p = 0, typed = document.getElementById('typed');
+function type(i=0){
+  if(i < phrases[p].length){
+    typed.textContent += phrases[p][i];
+    setTimeout(()=>type(i+1),65);
+  } else {
+    setTimeout(erase,1200);
+  }
+}
+function erase(){
+  if(typed.textContent.length){
+    typed.textContent = typed.textContent.slice(0,-1);
+    setTimeout(erase,40);
+  } else {
+    p = (p+1)%phrases.length;
+    setTimeout(type,200);
+  }
+}
+type();
+</script>
 </body>
 </html>
