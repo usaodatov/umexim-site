@@ -37,8 +37,23 @@
 
     .content{position:relative;z-index:2;max-width:90%;}
 
-    h1{font-size:clamp(2rem,6vw,4.5rem);text-transform:lowercase;margin-bottom:.6rem;position:relative;}
+    h1{font-size:clamp(2rem,6vw,4.5rem);text-transform:lowercase;margin-bottom:.6rem;position:relative;overflow:hidden;}
     h1::after{content:"";position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);width:60%;height:3px;background:var(--neon);box-shadow:0 0 6px var(--neon),0 0 12px var(--neon);}
+
+    /* animated union‑jack gradient for brand name */
+    .flag{
+      background:linear-gradient(90deg,#00247d 0%,#ffffff 33%,#cf142b 66%,#00247d 100%);
+      background-size:300% 100%;
+      animation:flagwave 6s linear infinite;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      display:inline-block;
+    }
+    @keyframes flagwave{
+      0%  {background-position:0 0;}
+      50% {background-position:100% 0;}
+      100%{background-position:0 0;}
+    }
 
     .tagline{font-size:clamp(.9rem,2.2vw,1.2rem);line-height:1.45;margin-bottom:1rem;text-transform:lowercase;color:#c7c7c7;}
     .tagline strong{color:var(--neon);}
@@ -53,11 +68,11 @@
   <canvas id="cosmic"></canvas>
 
   <div class="content">
-    <h1>umexim.com <span style="display:block;font-size:.55em">ai‑powered makeover in progress</span></h1>
+    <h1><span class="flag">umexim.com</span> <span style="display:block;font-size:.55em">ai‑powered makeover in progress</span></h1>
 
     <p class="tagline">
-      an ongoing, dynamic project by <strong>usaodatov</strong> — seeking the <em>ultimate me</em> in the world of ai.<br>
-      affiliated with regent college london & the university of greater manchester.
+      an ongoing, dynamic project by <strong>usaodatov</strong> — seeking the <em>ultimate me</em> in the world of ai<br>
+      regent college london & the university of greater manchester.
     </p>
 
     <p id="typed"></p>
@@ -198,6 +213,6 @@ function erase(){
   }
 }
 type();
-</script>
+</script> 
 </body>
 </html>
