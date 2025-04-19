@@ -1,134 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bamboo Kitchenware | EcoShop Marketplace</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9fdf7;
-      color: #333;
-    }
 
-    header {
-      background-color: #4a7c59;
-      padding: 15px 20px;
-      text-align: center;
-      color: white;
-    }
+<section class="container">
+  <h2>Featured Products</h2>
+  <div class="product-grid">
+    <div class="product"><h3>Bamboo Straws</h3><p>£5.99</p><button>Add to Cart</button></div>
+    <div class="product"><h3>Bamboo Mats</h3><p>£7.99</p><button>Add to Cart</button></div>
+    <div class="product"><h3>Bamboo Utensils</h3><p>£12.99</p><button>Add to Cart</button></div>
+    <div class="product"><h3>Bamboo Bowls</h3><p>£9.99</p><button>Add to Cart</button></div>
+    <div class="product"><h3>Bamboo Cutting Boards</h3><p>£14.99</p><button>Add to Cart</button></div>
+    <div class="product"><h3>Bamboo Cups</h3><p>£6.99</p><button>Add to Cart</button></div>
+  </div>
+</section>
 
-    nav ul {
-      list-style-type: none;
-      padding: 10px;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      background-color: #356040;
-    }
+<section class="test-buttons">
+  <button onclick="pingBackend()">Ping Backend</button>
+  <button onclick="sendMessage()">Send Message</button>
+</section>
 
-    nav ul li {
-      margin: 0 15px;
-    }
+<footer>
+  <p>&copy; 2025 Bamboo Kitchenware | EcoShop Marketplace</p>
+  <p><a href="#">Privacy Policy</a> | <a href="#">Terms</a></p>
+</footer>
 
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
+<script>
+  async function pingBackend() {
+    const res = await fetch("http://20.83.154.99:5000/api/ping");
+    const data = await res.json();
+    alert("Ping: " + data.message);
+  }
 
-    .hero {
-      text-align: center;
-      padding: 50px;
-      background-image: url('https://source.unsplash.com/1600x600/?bamboo,kitchen');
-      background-size: cover;
-      color: #fff;
-    }
-
-    .hero h1 {
-      font-size: 3em;
-      margin-bottom: 0;
-    }
-
-    .hero p {
-      font-size: 1.2em;
-      margin: 10px auto;
-      max-width: 700px;
-    }
-
-    .container {
-      padding: 30px;
-      text-align: center;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .product {
-      background-color: white;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      border-radius: 5px;
-    }
-
-    .test-buttons {
-      margin: 30px;
-      text-align: center;
-    }
-
-    .test-buttons button {
-      margin: 10px;
-      padding: 10px 20px;
-      background-color: #4a7c59;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    footer {
-      background-color: #356040;
-      padding: 15px;
-      color: white;
-      text-align: center;
-    }
-
-    footer a {
-      color: white;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <h1>Bamboo Kitchenware</h1>
-    <p>Sustainable Living Starts in Your Kitchen</p>
-  </header>
-
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">My Account</a></li>
-      <li><a href="#">Cart</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
-    <h1>Why Bamboo?</h1>
-    <p>Bamboo is naturally antibacterial, sustainable, rapidly renewable, and incredibly strong. It makes perfect sense for your kitchenware—safe for your family and better for our planet. Explore our carefully selected range of eco-friendly bamboo products.</p>
-  </section>
-
-  <section class="container">
-    <h2>Featured Products</h2>
-    <div class="product-grid">
-      <div class="product"><h3>Bamboo Straws</h3><p>£5.99</p><button>Add
+  async function sendMessage() {
+    const res = await fetch("http://20.83.154.99:5000/api/message", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: "Hello from umexim.com!" })
+    });
+    const data = await res.json();
+    alert("Reply: " + data.response);
+  }
+</script>
