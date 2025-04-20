@@ -1,61 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Umexim API Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Commerce Client-Server Test</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 100px;
-      background-color: #f9f9f9;
+      margin: 0;
+      padding: 50px;
+      background-color: #f0f2f5;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    p {
+      font-size: 16px;
+      max-width: 700px;
+      margin: 10px auto;
     }
     button {
       padding: 12px 20px;
-      margin: 10px;
+      margin: 15px;
       font-size: 16px;
-      background-color: #4a7c59;
+      background-color: #007acc;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #3d624a;
+      background-color: #005f99;
     }
   </style>
 </head>
 <body>
-  <button onclick="pingBackend()">Ping Backend</button>
-  <button onclick="sendMessage()">Send Message</button>
+
+  <h1>E-Commerce Client-Server System Test</h1>
+
+  <p>This page is used to test backend and frontend communication as part of the E-Commerce Innovations assignment.</p>
+  <p>The experiment involves verifying connectivity between a static HTML frontend and a Python socket-based backend server.</p>
+  <p>The objective is to validate the client-server model by sending a "ping" and a simple message from the browser.</p>
+  <p>This demonstration supports report sections on implementation, testing, and system integration.</p>
+
+  <button onclick="pingBackend()">Test Backend Ping</button>
+  <button onclick="sendMessage()">Test Message Send</button>
 
   <script>
     async function pingBackend() {
       try {
-        const response = await fetch("https://umexim.com/api/ping");
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const response = await fetch("https://api.umexim.com/api/ping");
         const data = await response.json();
-        alert("Ping: " + data.message);
-      } catch (error) {
-        alert("Ping failed: " + error.message);
+        alert("Ping Response: " + data.message);
+      } catch (err) {
+        alert("Ping Failed: " + err.message);
       }
     }
 
     async function sendMessage() {
       try {
-        const response = await fetch("https://umexim.com/api/message", {
+        const response = await fetch("https://api.umexim.com/api/message", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: "Hello from frontend!" })
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ text: "Hello from the frontend" })
         });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
-        alert("Reply: " + data.response);
-      } catch (error) {
-        alert("Message failed: " + error.message);
+        alert("Message Response: " + data.response);
+      } catch (err) {
+        alert("Send Failed: " + err.message);
       }
     }
   </script>
+
 </body>
 </html>
