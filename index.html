@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Umexim API Tester</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Umexim API Test</title>
   <style>
     body {
-      font-family: sans-serif;
-      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 100px;
+      background-color: #f9f9f9;
     }
-
     button {
       padding: 12px 20px;
       margin: 10px;
@@ -22,22 +21,20 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     button:hover {
       background-color: #3d624a;
     }
   </style>
 </head>
 <body>
-
   <button onclick="pingBackend()">Ping Backend</button>
   <button onclick="sendMessage()">Send Message</button>
 
   <script>
     async function pingBackend() {
       try {
-        const res = await fetch("https://umexim.com/api/ping");
-        const data = await res.json();
+        const response = await fetch("/api/ping");
+        const data = await response.json();
         alert("Ping: " + data.message);
       } catch (error) {
         alert("Ping failed: " + error.message);
@@ -46,20 +43,17 @@
 
     async function sendMessage() {
       try {
-        const res = await fetch("https://umexim.com/api/message", {
+        const response = await fetch("/api/message", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ text: "Hello from frontend!" })
         });
-        const data = await res.json();
+        const data = await response.json();
         alert("Reply: " + data.response);
       } catch (error) {
         alert("Message failed: " + error.message);
       }
     }
   </script>
-
 </body>
 </html>
