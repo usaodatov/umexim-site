@@ -131,8 +131,8 @@
   <section class="hero">
     <h2>Project Description</h2>
     <p>This website was built as part of the SWE4303 Computing Infrastructure module.<br>
-    It demonstrates frontend-backend integration hosted via Azure Static Web Apps.<br>
-    The frontend interacts with a Python Flask backend deployed on an Ubuntu VM.</p>
+      It demonstrates frontend-backend integration hosted via Azure Static Web Apps.<br>
+      The frontend interacts with a Python Flask backend deployed on an Ubuntu VM.</p>
   </section>
 
   <section class="info-boxes">
@@ -141,7 +141,7 @@
       <ul>
         <li>Frontend: HTML/CSS, deployed on Azure Static Web App</li>
         <li>Backend: Python Flask, hosted on Ubuntu VM</li>
-        <li>Connected via HTTP requests (port 5000)</li>
+        <li>Connected via HTTPS requests (secured NGINX proxy)</li>
       </ul>
     </div>
     <div class="info-box">
@@ -149,7 +149,7 @@
       <ul>
         <li>API ping check</li>
         <li>Message exchange using POST</li>
-        <li>Live deployment: https://umexim.com</li>
+        <li>Live deployment: <a href="https://umexim.com" style="color: #4a7c59;">https://umexim.com</a></li>
       </ul>
     </div>
   </section>
@@ -188,7 +188,7 @@
   <script>
     async function pingBackend() {
       try {
-        const res = await fetch("http://20.83.154.99:5000/api/ping");
+        const res = await fetch("https://umexim.com/api/ping");
         const data = await res.json();
         alert("Ping: " + data.message);
       } catch (error) {
@@ -198,7 +198,7 @@
 
     async function sendMessage() {
       try {
-        const res = await fetch("http://20.83.154.99:5000/api/message", {
+        const res = await fetch("https://umexim.com/api/message", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
