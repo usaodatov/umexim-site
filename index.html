@@ -33,7 +33,8 @@
   <script>
     async function pingBackend() {
       try {
-        const response = await fetch("/api/ping");
+        const response = await fetch("https://umexim.com/api/ping");
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
         alert("Ping: " + data.message);
       } catch (error) {
@@ -43,11 +44,12 @@
 
     async function sendMessage() {
       try {
-        const response = await fetch("/api/message", {
+        const response = await fetch("https://umexim.com/api/message", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ text: "Hello from frontend!" })
         });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
         alert("Reply: " + data.response);
       } catch (error) {
