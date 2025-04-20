@@ -3,72 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>umexim.com | API Tester</title>
+  <title>Umexim API Tester</title>
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f2f9f2;
-      color: #333;
+      font-family: sans-serif;
+      background-color: #f9f9f9;
       text-align: center;
-    }
-
-    header {
-      background-color: #4a7c59;
-      color: white;
-      padding: 40px 20px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    p {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
-
-    .buttons {
-      margin-top: 50px;
+      padding-top: 100px;
     }
 
     button {
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 16px;
       background-color: #4a7c59;
       color: white;
       border: none;
-      padding: 12px 25px;
-      margin: 15px;
-      font-size: 1em;
-      border-radius: 5px;
+      border-radius: 4px;
       cursor: pointer;
     }
 
     button:hover {
       background-color: #3d624a;
     }
-
-    footer {
-      margin-top: 80px;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #777;
-    }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>umexim.com</h1>
-    <p>Frontend to test backend API connectivity</p>
-  </header>
 
-  <div class="buttons">
-    <button onclick="pingBackend()">Ping Backend</button>
-    <button onclick="sendMessage()">Send Message</button>
-  </div>
-
-  <footer>&copy; 2025 Umexim Project - SWE4303</footer>
+  <button onclick="pingBackend()">Ping Backend</button>
+  <button onclick="sendMessage()">Send Message</button>
 
   <script>
     async function pingBackend() {
@@ -77,7 +40,7 @@
         const data = await res.json();
         alert("Ping: " + data.message);
       } catch (error) {
-        alert("Error pinging backend: " + error);
+        alert("Ping failed: " + error.message);
       }
     }
 
@@ -88,14 +51,15 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ text: "Hello from umexim.com!" })
+          body: JSON.stringify({ text: "Hello from frontend!" })
         });
         const data = await res.json();
         alert("Reply: " + data.response);
       } catch (error) {
-        alert("Error sending message: " + error);
+        alert("Message failed: " + error.message);
       }
     }
   </script>
+
 </body>
 </html>
