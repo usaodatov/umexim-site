@@ -1,112 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>umexim.com | Bamboo Kitchenware</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>umexim.com | API Tester</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f9fdf7;
+      font-family: Arial, sans-serif;
+      background-color: #f2f9f2;
       color: #333;
+      text-align: center;
     }
 
     header {
       background-color: #4a7c59;
-      padding: 15px 20px;
-      text-align: center;
       color: white;
+      padding: 40px 20px;
     }
 
-    nav ul {
-      list-style-type: none;
-      padding: 10px;
+    h1 {
       margin: 0;
-      display: flex;
-      justify-content: center;
-      background-color: #356040;
+      font-size: 2.5em;
     }
 
-    nav ul li {
-      margin: 0 15px;
+    p {
+      font-size: 1.2em;
+      margin-top: 10px;
     }
 
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
+    .buttons {
+      margin-top: 50px;
     }
 
-    .hero {
-      text-align: center;
-      padding: 50px 20px;
-      background-color: #e9f1e7;
-    }
-
-    .info-boxes {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin: 30px;
-    }
-
-    .info-box {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 300px;
-    }
-
-    .container {
-      padding: 30px;
-      text-align: center;
-    }
-
-    .product-grid {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .product {
-      background-color: white;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      border-radius: 5px;
-      width: 200px;
-    }
-
-    .test-buttons {
-      margin: 30px;
-      text-align: center;
-    }
-
-    .test-buttons button {
-      margin: 10px;
-      padding: 10px 20px;
+    button {
       background-color: #4a7c59;
       color: white;
       border: none;
+      padding: 12px 25px;
+      margin: 15px;
+      font-size: 1em;
       border-radius: 5px;
       cursor: pointer;
     }
 
-    footer {
-      background-color: #356040;
-      padding: 15px;
-      color: white;
-      text-align: center;
+    button:hover {
+      background-color: #3d624a;
     }
 
-    footer a {
-      color: white;
-      text-decoration: underline;
+    footer {
+      margin-top: 80px;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #777;
     }
   </style>
 </head>
@@ -114,76 +60,15 @@
 <body>
   <header>
     <h1>umexim.com</h1>
-    <p>Umexim Bamboo Kitchenware / Homeware Bioproducts</p>
+    <p>Frontend to test backend API connectivity</p>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">My Account</a></li>
-      <li><a href="#">Cart</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
-    <h2>Project Description</h2>
-    <p>This website was built as part of the SWE4303 Computing Infrastructure module.<br>
-      It demonstrates frontend-backend integration hosted via Azure Static Web Apps.<br>
-      The frontend interacts with a Python Flask backend deployed on an Ubuntu VM.</p>
-  </section>
-
-  <section class="info-boxes">
-    <div class="info-box">
-      <h3>System Setup</h3>
-      <ul>
-        <li>Frontend: HTML/CSS, deployed on Azure Static Web App</li>
-        <li>Backend: Python Flask, hosted on Ubuntu VM</li>
-        <li>Connected via HTTPS requests (secured NGINX proxy)</li>
-      </ul>
-    </div>
-    <div class="info-box">
-      <h3>Project Features</h3>
-      <ul>
-        <li>API ping check</li>
-        <li>Message exchange using POST</li>
-        <li>Live deployment: <a href="https://umexim.com" style="color: #4a7c59;">https://umexim.com</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="container">
-    <h2>Example Products</h2>
-    <div class="product-grid">
-      <div class="product">
-        <h3>Bamboo Straws (Example)</h3>
-        <p>£5.99</p>
-        <button>Add to Cart</button>
-      </div>
-      <div class="product">
-        <h3>Bamboo Utensils (Example)</h3>
-        <p>£12.99</p>
-        <button>Add to Cart</button>
-      </div>
-      <div class="product">
-        <h3>Bamboo Bowls (Example)</h3>
-        <p>£9.99</p>
-        <button>Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <div class="test-buttons">
+  <div class="buttons">
     <button onclick="pingBackend()">Ping Backend</button>
     <button onclick="sendMessage()">Send Message</button>
   </div>
 
-  <footer>
-    <p>&copy; 2025 Bamboo Kitchenware | EcoShop Marketplace</p>
-    <p><a href="#">Privacy Policy</a> | <a href="#">Terms</a></p>
-  </footer>
+  <footer>&copy; 2025 Umexim Project - SWE4303</footer>
 
   <script>
     async function pingBackend() {
@@ -213,5 +98,4 @@
     }
   </script>
 </body>
-
 </html>
