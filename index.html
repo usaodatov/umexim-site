@@ -79,7 +79,7 @@
         const data = await response.json();
         alert("Ping Result: " + data.message);
       } catch (err) {
-        alert("Ping Request Failed: " + err.message);
+        alert("Ping Request Failed - BACKEND DOWN: " + err.message);
       }
     }
 
@@ -97,7 +97,7 @@
         const data = await response.json();
         alert("Server Response: " + data.response);
       } catch (err) {
-        alert("Message Send Failed: " + err.message);
+        alert("Message Send Failed - BACKEND DOWN: " + err.message);
       }
     }
   </script>
