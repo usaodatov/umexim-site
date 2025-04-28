@@ -41,12 +41,12 @@
 </head>
 <body>
 
-  <!-- Project title and primary heading -->
-  <h1>UMEXIM.COM - E-Commerce Client-Server Demo</h1>
+  <!-- primary heading -->
+  <h1>UMEXIM.COM - E-Commerce Client-Server Demo - Student No: HE26228 - </h1>
 
-  <!-- Assignment context and system overview -->
+  <!-- Assignment context-->
   <p>
-    This <strong>SWE4303 Computing Infrastructure</strong> project for Regent College London, University of Bolton, 
+    This <strong>SWE4303 Computing Infrastructure</strong> project for Regent College London, 
     powers an eco-friendly e-commerce marketplace. The Azure-hosted frontend (<strong>umexim.com</strong>) connects 
     securely via HTTPS to a Flask backend running on an Azure VM (<strong>api.umexim.com</strong>), 
     with DNS routing managed through <strong>AWS Route 53</strong>.
@@ -61,17 +61,17 @@
 
   <!-- Instructions for user interaction -->
   <p>
-    Click the buttons below to validate integration. Results will appear as alert popups,
-    demonstrating successful client-server communication for your assignment report.
+    Please Click the buttons below to validate integration. Results will appear as alert popups,
+    demonstrating successful client-server communication.
   </p>
 
-  <!-- Ping and Message buttons trigger JS functions -->
+  <!-- Ping and Message trigger JS -->
   <button onclick="pingBackend()">Ping Backend Server</button>
   <button onclick="sendMessage()">Send Test Message</button>
 
-  <!-- JavaScript functions to interact with backend API -->
+  <!-- interact with backend API -->
   <script>
-    // Fetches GET response from /api/ping and shows it in an alert
+    // Fetches GET resp.
     async function pingBackend() {
       try {
         const response = await fetch("https://api.umexim.com/api/ping");
@@ -83,7 +83,7 @@
       }
     }
 
-    // Sends POST request to /api/message and alerts the response
+    // Sends POST request 
     async function sendMessage() {
       try {
         const response = await fetch("https://api.umexim.com/api/message", {
