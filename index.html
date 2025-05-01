@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- HTML metadata and page responsiveness -->
+  <!-- HTML metadata/page responsce -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UMEXIM.COM - Client-Server Demo</title>
 
-  <!-- Internal CSS for layout and styling -->
+  <!-- CSS/Internal : layout /styling -->
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -71,13 +71,13 @@
     demonstrating successful client-server communication.
   </p>
 
-  <!-- Ping and Message trigger JS -->
+  <!-- Ping/Message trigger JS -->
   <button onclick="pingBackend()">Ping Backend Server</button>
   <button onclick="sendMessage()">Send Test Message</button>
 
-  <!-- interact with backend API -->
+  <!-- comm to backend API -->
   <script>
-    // Fetches GET resp.
+    // Fetch GET resp.
     async function pingBackend() {
       try {
         const response = await fetch("https://api.umexim.com/api/ping");
@@ -89,7 +89,7 @@
       }
     }
 
-    // Sends POST request 
+    // POST request 
     async function sendMessage() {
       try {
         const response = await fetch("https://api.umexim.com/api/message", {
