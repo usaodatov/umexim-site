@@ -2,154 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UMEXIM (London) - AI & Machine Learning</title>
-  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UMEXIM — Access Portal</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      background: black;
-      color: #ffffff;
-      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00ff88;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
     }
+
     .title-container {
       text-align: center;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
+      margin-top: 40px;
     }
-    h1 {
-      font-family: 'Uncial Antiqua', serif;
-      font-size: 5rem;
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+
+    h1, h2 {
       margin: 0;
-      color: #ffffff;
+      font-weight: 400;
+      text-shadow: 0 0 10px #00ff88;
     }
-    h2 {
-      font-family: 'Arial', sans-serif;
-      font-size: 1.5rem;
-      margin: 5px 0;
-      color: #ffffff;
-    }
-    .matrix-char {
-      position: absolute;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 1.2rem;
-      color: #00ff00; /* Neon green */
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
-      animation: matrixRain 10s linear infinite;
-      pointer-events: none;
-      z-index: 5;
-    }
-    @keyframes matrixRain {
-      0% { opacity: 0; transform: translateY(-100vh); }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
-      100% { opacity: 0; transform: translateY(100vh); }
-    }
-    .formula {
-      position: absolute;
-      font-family: 'Reenie Beanie', cursive;
-      font-size: 1.5rem;
-      animation: verySlowFadeInOut 16s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 5;
-    }
-    @keyframes verySlowFadeInOut {
-      0% { opacity: 0; transform: translateY(20px); }
-      30% { opacity: 0.6; }
-      70% { opacity: 0.6; }
-      100% { opacity: 0; transform: translateY(-20px); }
-    }
+
     .login-container {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(255, 255, 255, 0.05);
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    input[type="password"] {
       padding: 10px;
-      border-radius: 6px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      width: 73px;
-      z-index: 10;
-      opacity: 0.7;
-      transition: opacity 0.3s;
+      font-size: 16px;
+      border: 1px solid #00ff88;
+      background: transparent;
+      color: #00ff88;
+      border-radius: 5px;
+      width: 200px;
+      text-align: center;
     }
-    .login-container:hover {
-      opacity: 1;
-    }
-    .login-container input {
-      display: block;
-      width: 100%;
-      margin: 6px 0;
-      padding: 4px;
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      background: #00ff88;
+      color: black;
       border: none;
-      border-radius: 3px;
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      font-size: 0.7rem;
-      font-family: 'Share Tech Mono', monospace;
-    }
-    .login-container input::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-    }
-    .login-container button {
-      width: 100%;
-      padding: 6px;
-      background: rgba(0, 122, 204, 0.7);
-      border: none;
-      border-radius: 20px 20px 10px 10px; /* Teapot-like shape */
-      color: white;
-      font-size: 0.7rem;
-      font-family: 'Share Tech Mono', monospace;
+      border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s;
-      position: relative;
-      overflow: hidden;
     }
-    .login-container button::before {
-      content: '';
+
+    button:hover {
+      background: #00cc66;
+    }
+
+    .matrix-char, .formula {
       position: absolute;
-      top: 10%;
-      right: 10%;
-      width: 10px;
-      height: 10px;
-      background: rgba(255, 255, 255, 0.3); /* Teapot spout effect */
-      border-radius: 50%;
-      transform: rotate(45deg);
+      font-size: 14px;
+      animation: fall 10s linear forwards;
+      pointer-events: none;
     }
-    .login-container button:hover {
-      background: rgba(0, 95, 153, 0.9);
+
+    @keyframes fall {
+      0% { top: -50px; }
+      100% { top: 110%; }
     }
+
+    .welcome-popup {
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #00ff88;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ff88aa;
+      font-size: 1.5rem;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      z-index: 999;
+      text-shadow: 0 0 10px #00ff88;
+    }
+
+    .countdown {
+      font-size: 2rem;
+      margin-top: 10px;
+      text-shadow: 0 0 6px #00ff88;
+    }
+
     .copyright {
       position: fixed;
       bottom: 10px;
-      left: 10px;
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.6rem;
-      color: rgba(255, 255, 255, 0.5);
+      width: 100%;
       text-align: center;
-      opacity: 0.7;
-      z-index: 10;
+      color: rgba(0,255,136,0.4);
+      font-size: 12px;
     }
   </style>
 </head>
@@ -158,103 +107,102 @@
     <h1>UMEXIM</h1>
     <h2>(London)</h2>
   </div>
+
   <div class="login-container">
-    <input type="text" id="username" placeholder="Identify" />
-    <input type="password" id="password" placeholder="Code" />
-    <button onclick="validateLogin()">Pour It</button>
+    <input type="password" id="identify" placeholder="Identify" />
+    <button onclick="validateToken()">Identify</button>
   </div>
+
+  <div id="welcome-popup" class="welcome-popup">
+    <div id="welcome-message">Hello Umid</div>
+    <div id="countdown" class="countdown"></div>
+  </div>
+
   <div class="copyright">© usaodatov 2025</div>
+
+  <audio id="access-granted" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.wav"></audio>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
   <script>
-    // Predefined credentials (hashed for comparison)
-    const validUsername = "usaodatov";
-    const validPasswordHash = "e8a3e6a1f9b4c7d2e5f6a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9"; // SHA-256 of 'Jafarov80!'
-
-    // Matrix-style characters (numbers, letters, symbols)
+    const validTokenHash = "d92b55b47da4f12a71118deefbf8cbad8de791d52c717149ad27a4e2c279765b";
     const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()+-=[]{}|;:,.<>?";
-
-    // Algorithmic formulas and code snippets
     const formulas = [
-      "f(x) = σ(Wx + b)",
-      "E = mc²",
-      "L = -∑[y log(ŷ) + (1-y)log(1-ŷ)]",
-      "A = X^T X",
-      "∇f(x) = ∂f/∂x",
-      "ŷ = softmax(Wx + b)",
-      "∫ f(x) dx",
-      "W = W - α∇L(W)",
-      "z = (x - μ)/σ",
-      "P(A|B) = P(B|A)P(A)/P(B)",
-      "torch.nn.Linear(64, 10)",
-      "model = tf.keras.Sequential()",
-      "np.dot(X, W) + b",
+      "f(x) = σ(Wx + b)", "E = mc²", "L = -∑[y log(ŷ) + (1-y)log(1-ŷ)]",
+      "A = XᵀX", "∇f(x) = ∂f/∂x", "ŷ = softmax(Wx + b)",
+      "∫ f(x) dx", "W = W - α∇L(W)", "z = (x - μ)/σ",
+      "P(A|B) = P(B|A)P(A)/P(B)", "torch.nn.Linear(64, 10)",
+      "model = tf.keras.Sequential()", "np.dot(X, W) + b",
       "sklearn.metrics.accuracy_score(y, ŷ)"
     ];
+    const neonColors = ["#00ff00", "#00ffff", "#ff00ff"];
+    const wisdoms = [
+      "The code is strong with this one.",
+      "Alhamdulillah, progress made.",
+      "Remember: Clear mind, clean syntax.",
+      "Stack overflow, but never give up.",
+      "Every bug is a hidden blessing."
+    ];
 
-    // Neon colors for formulas
-    const neonColors = ["#00ff00", "#00ffff", "#ff00ff"]; // Green, Cyan, Magenta
-
-    // Create falling matrix characters
     function createMatrixChar() {
       const char = characters[Math.floor(Math.random() * characters.length)];
       const div = document.createElement("div");
       div.className = "matrix-char";
       div.textContent = char;
-
-      // Position anywhere across the screen
-      const x = Math.random() * (window.innerWidth - 50);
-      div.style.left = x + "px";
-      div.style.top = "-50px"; // Start above the viewport
+      div.style.left = Math.random() * (window.innerWidth - 50) + "px";
+      div.style.top = "-50px";
+      div.style.color = "#00ff88";
       document.body.appendChild(div);
-
-      // Randomize animation delay
       div.style.animationDelay = Math.random() * 5 + "s";
-
-      // Remove after animation
       setTimeout(() => div.remove(), 10000);
     }
 
-    // Create floating formulas and code snippets
     function createFormula() {
       const formula = formulas[Math.floor(Math.random() * formulas.length)];
       const div = document.createElement("div");
       div.className = "formula";
       div.textContent = formula;
-
-      // Random neon color
-      div.style.color = neonColors[Math.floor(Math.random() * neonColors.length)];
-      div.style.textShadow = `0 0 5px ${div.style.color}, 0 0 10px ${div.style.color}`;
-
-      // Position anywhere across the screen
-      const x = Math.random() * (window.innerWidth - 200);
-      const y = Math.random() * (window.innerHeight - 100);
-      div.style.left = x + "px";
-      div.style.top = y + "px";
+      const color = neonColors[Math.floor(Math.random() * neonColors.length)];
+      div.style.color = color;
+      div.style.textShadow = `0 0 5px ${color}, 0 0 10px ${color}`;
+      div.style.left = Math.random() * (window.innerWidth - 200) + "px";
+      div.style.top = Math.random() * (window.innerHeight - 100) + "px";
       document.body.appendChild(div);
-
-      // Randomize animation delay
       div.style.animationDelay = Math.random() * 5 + "s";
-
-      // Remove after animation
       setTimeout(() => div.remove(), 16000);
     }
 
-    // Generate matrix characters at 30% higher frequency
     setInterval(createMatrixChar, 140);
-
-    // Generate formulas at intervals
     setInterval(createFormula, 1200);
 
-    // Validate login
-    async function validateLogin() {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const passwordHash = sha256(password);
+    async function validateToken() {
+      const token = document.getElementById("identify").value;
+      const tokenHash = sha256(token);
 
-      if (username === validUsername && passwordHash === validPasswordHash) {
-        alert("Login successful! Welcome to UMEXIM (London).");
+      if (tokenHash === validTokenHash) {
+        const popup = document.getElementById("welcome-popup");
+        const message = document.getElementById("welcome-message");
+        const countdownEl = document.getElementById("countdown");
+        const audio = document.getElementById("access-granted");
+
+        // Play sound and random wisdom
+        audio.play();
+        const wisdom = wisdoms[Math.floor(Math.random() * wisdoms.length)];
+        message.textContent = `Hello Umid — ${wisdom}`;
+
+        let timeLeft = 5;
+        countdownEl.textContent = timeLeft;
+        popup.style.display = "flex";
+
+        const timer = setInterval(() => {
+          timeLeft--;
+          countdownEl.textContent = timeLeft;
+          if (timeLeft === 0) {
+            clearInterval(timer);
+            popup.style.display = "none";
+          }
+        }, 1000);
       } else {
-        alert("Invalid username or password.");
+        alert("🛑 Invalid token.");
       }
     }
   </script>
