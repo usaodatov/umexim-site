@@ -61,49 +61,30 @@
       letter-spacing: 1px;
     }
 
-    .login-input {
+    /* NEW: bottom center project link */
+    .project-link {
       position: absolute;
-      bottom: 20px;
-      right: 20px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(0, 255, 136, 0.3);
-      color: #00ff88;
-      font-size: 14px;
-      outline: none;
-      padding: 5px;
-      transition: all 0.3s ease;
-      opacity: 0.3;
-      width: 130px;
-      z-index: 200;
-    }
-
-    .login-input:focus {
-      border-bottom: 1px solid #00ff88;
-      opacity: 1;
-    }
-
-    .welcome-popup {
-      position: fixed;
-      top: 30%;
+      bottom: 26px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: #00ff88;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #00ff88aa;
-      font-size: 1.5rem;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      z-index: 999;
-      text-shadow: 0 0 10px #00ff88;
+      z-index: 250;
+      padding: 10px 18px;
+      border: 1px solid rgba(0, 255, 136, 0.45);
+      border-radius: 10px;
+      color: rgba(0, 255, 136, 0.9);
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(2px);
+      transition: all 0.25s ease;
     }
 
-    .countdown {
-      font-size: 2rem;
-      margin-top: 10px;
+    .project-link:hover {
+      border-color: rgba(0, 255, 136, 0.95);
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.35);
+      color: rgba(0, 255, 136, 1);
+      transform: translateX(-50%) translateY(-2px);
     }
 
     .rain-line {
@@ -150,26 +131,10 @@
     <div class="designer-tag">usaodatov design</div>
   </div>
 
-  <input type="password" id="identify" class="login-input" placeholder="Identify" />
+  <!-- NEW: clickable project link -->
+  <a class="project-link" href="calculator.html">Project: Calculator</a>
 
-  <div id="welcome-popup" class="welcome-popup">
-    <div id="welcome-message">Hello Umid</div>
-    <div id="countdown" class="countdown"></div>
-  </div>
-
-  <audio id="access-granted" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.wav"></audio>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
   <script>
-    const validTokenHash = "d92b55b47da4f12a71118deefbf8cbad8de791d52c717149ad27a4e2c279765b";
-    const wisdoms = [
-      "The code is strong with this one.",
-      "Alhamdulillah, progress made.",
-      "Remember: Clear mind, clean syntax.",
-      "Stack overflow, but never give up.",
-      "Every bug is a hidden blessing."
-    ];
-
     const formulas = [
       "f(x) = σ(Wx + b)", "E = mc²", "L = -∑[y log(ŷ) + (1-y)log(1-ŷ)]",
       "A = XᵀX", "∇f(x) = ∂f/∂x", "ŷ = softmax(Wx + b)",
@@ -236,42 +201,6 @@
       document.body.appendChild(div);
       setTimeout(() => div.remove(), 7000);
     }
-
-    function showPopup() {
-      const popup = document.getElementById("welcome-popup");
-      const message = document.getElementById("welcome-message");
-      const countdownEl = document.getElementById("countdown");
-      const audio = document.getElementById("access-granted");
-
-      const wisdom = wisdoms[Math.floor(Math.random() * wisdoms.length)];
-      message.textContent = `Hello Umid — ${wisdom}`;
-      audio.play();
-      popup.style.display = "flex";
-
-      let timeLeft = 5;
-      countdownEl.textContent = timeLeft;
-
-      const timer = setInterval(() => {
-        timeLeft--;
-        countdownEl.textContent = timeLeft;
-        if (timeLeft === 0) {
-          clearInterval(timer);
-          popup.style.display = "none";
-        }
-      }, 1000);
-    }
-
-    document.getElementById("identify").addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        const token = this.value;
-        const hash = sha256(token);
-        if (hash === validTokenHash) {
-          showPopup();
-        } else {
-          alert("Invalid token.");
-        }
-      }
-    });
 
     setInterval(createMatrixRainLine, 120);
     setInterval(createFormula, 1400);
