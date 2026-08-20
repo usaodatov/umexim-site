@@ -39,8 +39,8 @@
       font-family: 'Playfair Display', serif;
       font-size: 2.8rem;
       text-align: center;
-      color: rgba(0, 255, 136, 0.95);
-      text-shadow: 0 0 8px #00ff88, 0 0 16px #00ff88;
+      color: rgba(0, 191, 255, 0.95);
+      text-shadow: 0 0 8px #00BFFF, 0 0 16px #00BFFF;
       z-index: 100;
       pointer-events: none;
     }
@@ -48,14 +48,14 @@
     .center-logo .sub {
       font-size: 1.2rem;
       font-family: 'Share Tech Mono', monospace;
-      color: rgba(0,255,136,0.6);
+      color: rgba(0, 191, 255,0.6);
       letter-spacing: 2px;
     }
 
     .center-logo .designer-tag {
       font-size: 0.65rem;
       margin-top: 14px;
-      color: rgba(0, 255, 136, 0.3);
+      color: rgba(0, 191, 255, 0.3);
       font-family: 'Playfair Display', serif;
       text-transform: lowercase;
       letter-spacing: 1px;
@@ -69,9 +69,9 @@
       transform: translateX(-50%);
       z-index: 250;
       padding: 10px 18px;
-      border: 1px solid rgba(0, 255, 136, 0.45);
+      border: 1px solid rgba(0, 191, 255, 0.45);
       border-radius: 10px;
-      color: rgba(0, 255, 136, 0.9);
+      color: rgba(0, 191, 255, 0.9);
       text-decoration: none;
       font-size: 14px;
       letter-spacing: 1px;
@@ -81,9 +81,9 @@
     }
 
     .project-link:hover {
-      border-color: rgba(0, 255, 136, 0.95);
-      box-shadow: 0 0 10px rgba(0, 255, 136, 0.35);
-      color: rgba(0, 255, 136, 1);
+      border-color: rgba(0, 191, 255, 0.95);
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.35);
+      color: rgba(0, 191, 255, 1);
       transform: translateX(-50%) translateY(-2px);
     }
 
@@ -92,7 +92,7 @@
       top: -100px;
       font-size: 14px;
       line-height: 1.4;
-      color: #00ff00;
+      color: #00BFFF;
       font-family: monospace;
       white-space: pre;
       animation: drop 5s linear infinite;
@@ -177,8 +177,8 @@
       div.style.left = x + "px";
       div.style.top = y + "px";
       div.style.fontFamily = handwritingFonts[Math.floor(Math.random() * handwritingFonts.length)];
-      div.style.color = "#00ff88";
-      div.style.textShadow = "0 0 4px #00ff88, 0 0 8px #00ff88";
+      div.style.color = "#00BFFF";
+      div.style.textShadow = "0 0 4px #00BFFF, 0 0 8px #00BFFF";
       document.body.appendChild(div);
       setTimeout(() => div.remove(), 16000);
     }
